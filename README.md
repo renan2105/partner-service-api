@@ -1,2 +1,2 @@
 # account-service
-Repository for account rules services.
+Spring boot microservice for account rules.
