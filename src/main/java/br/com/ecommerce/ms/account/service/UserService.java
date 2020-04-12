@@ -25,12 +25,12 @@ import br.com.ecommerce.ms.account.entity.User;
 public interface UserService {
 	
 	/**
-	 * Register new user.
+	 * Create new user.
 	 * 
 	 * @param User
 	 * @return User if created.
 	 */
-	public User register (User user) throws Exception;
+	public User create (User user) throws Exception;
 	
 	
 }

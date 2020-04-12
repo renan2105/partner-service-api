@@ -54,12 +54,12 @@ public class UserRestWsEndpoint {
 	/**
 	 * End points definitions. 
 	 */	
-	@RequestMapping(method = RequestMethod.POST, value = "/public/user/register", consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<?> register (@RequestBody User user) { 
+	@RequestMapping(method = RequestMethod.POST, value = "/public/create/user", consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<?> create (@RequestBody User user) { 
 		
 		try {
 
-			return ResponseEntity.ok(new APIGenericResponse(userService.register(user), new StatusResponse("Request API is successfully", HttpStatus.CREATED)));
+			return ResponseEntity.ok(new APIGenericResponse(userService.create(user), new StatusResponse("Request API is successfully", HttpStatus.CREATED)));
 		
 		} catch (Exception e) {
 			logger.error(e.getMessage());

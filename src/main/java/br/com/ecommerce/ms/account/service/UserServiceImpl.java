@@ -38,13 +38,13 @@ public class UserServiceImpl implements UserService {
 	static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	/**
-	 * Register new user.
+	 * Create new user.
 	 * 
 	 * @param User
 	 * @return Authentication token if created.
 	 */
 	@Override
-	public User register (User user) throws Exception {
+	public User create (User user) throws Exception {
 		
 		try {
 			
