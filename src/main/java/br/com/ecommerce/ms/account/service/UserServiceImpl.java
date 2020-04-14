@@ -77,6 +77,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Optional<User> read (Long id) throws Exception {
 		
+		logger.info("Reading user by identification.");
+		
 		try {
 			
 			return iUserRepository.findById(id);			
@@ -96,6 +98,8 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public User update (Long id, User detail) throws Exception {
+		
+		logger.info("Updating user by identification and user details.");
 		
 		try {
 			
@@ -120,6 +124,8 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public boolean delete (Long id) throws Exception {
+		
+		logger.info("Deleting user by identification.");
 		
 		try {
 			
