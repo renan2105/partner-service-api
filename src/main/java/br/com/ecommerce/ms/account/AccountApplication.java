@@ -21,6 +21,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * @author ProfitCode IT Solutions
@@ -28,6 +29,7 @@ import org.springframework.context.annotation.Bean;
  */
 @ServletComponentScan
 @SpringBootApplication
+@EnableJpaRepositories
 @EnableCaching
 public class AccountApplication {
 

@@ -14,13 +14,17 @@
  */
 package br.com.ecommerce.ms.account.service;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import br.com.ecommerce.ms.account.entity.User;
+import br.com.ecommerce.ms.account.repository.IUserRepository;
 
 /**
  * @author ProfitCode IT Solutions
@@ -38,6 +42,12 @@ public class UserServiceImpl implements UserService {
 	static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	/**
+	 * Set data repositories.
+	 */
+	@Autowired
+	private IUserRepository iUserRepository;
+	
+	/**
 	 * Create new user.
 	 * 
 	 * @param User
@@ -46,15 +56,85 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User create (User user) throws Exception {
 		
+		logger.info("Creating a new user.");
+		
 		try {
 			
-			logger.info("New user ".concat(user.getName()).concat(" successfully registered."));
+			return iUserRepository.save(user);
 			
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
-
-		return user;
+		
+	}
+	
+	/**
+	 * Get user.
+	 * 
+	 * @param id
+	 * @return User if found.
+	 */
+	@Override
+	public Optional<User> read (Long id) throws Exception {
+		
+		try {
+			
+			return iUserRepository.findById(id);			
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+	}
+	
+	/**
+	 * Update user.
+	 * 
+	 * @param id
+	 * @param details
+	 * @return User if found.
+	 */
+	@Override
+	public User update (Long id, User detail) throws Exception {
+		
+		try {
+			
+			Optional<User> user = iUserRepository.findById(id);
+			
+			if (user.isPresent()) {				
+				return iUserRepository.save(new User(id, detail.getName(), detail.getEmail()));
+			} 
+			
+			return null;
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Delete user.
+	 * 
+	 * @param id
+	 * @return True if deleted.
+	 */
+	@Override
+	public boolean delete (Long id) throws Exception {
+		
+		try {
+			
+			Optional<User> user = iUserRepository.findById(id);
+			
+			if (user.isPresent()) {				
+				iUserRepository.deleteById(id);
+				return true;
+			} 
+			
+			return false;
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
 	}
 	
 }

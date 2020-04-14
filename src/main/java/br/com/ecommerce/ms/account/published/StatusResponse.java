@@ -50,5 +50,4 @@ public class StatusResponse implements Serializable {
 	public void setHttp(HttpStatus http) {
 		this.http = http;
 	}
-
 }

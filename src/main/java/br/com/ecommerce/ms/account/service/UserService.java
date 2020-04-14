@@ -14,6 +14,8 @@
  */
 package br.com.ecommerce.ms.account.service;
 
+import java.util.Optional;
+
 import br.com.ecommerce.ms.account.entity.User;
 
 /**
@@ -32,6 +34,29 @@ public interface UserService {
 	 */
 	public User create (User user) throws Exception;
 	
+	/**
+	 * Get user.
+	 * 
+	 * @param id
+	 * @return User if found.
+	 */
+	public Optional<User> read (Long id) throws Exception;
 	
+	/**
+	 * Update user.
+	 * 
+	 * @param id
+	 * @param details
+	 * @return User if found.
+	 */
+	public User update (Long id, User detail) throws Exception;
+	
+	/**
+	 * Delete user.
+	 * 
+	 * @param id
+	 * @return True if deleted.
+	 */
+	public boolean delete (Long id) throws Exception;
 }
 

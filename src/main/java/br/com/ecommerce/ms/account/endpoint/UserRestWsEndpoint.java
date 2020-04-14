@@ -14,12 +14,17 @@
  */
 package br.com.ecommerce.ms.account.endpoint;
 
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,6 +70,69 @@ public class UserRestWsEndpoint {
 			logger.error(e.getMessage());
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new APIGenericResponse(false, new StatusResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR)));
+		}		
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/public/read/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<?> read (@PathVariable(value = "id") Long id) { 
+		
+		try {
+
+			Optional<User> user = userService.read(id);
+			
+			if (user.isPresent()) {
+				
+				return ResponseEntity.ok(new APIGenericResponse(user.get(), new StatusResponse("Request API is successfully", HttpStatus.OK)));
+			
+			} else {
+				
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new APIGenericResponse(null, new StatusResponse("User not found.", HttpStatus.NOT_FOUND)));
+			}
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new APIGenericResponse(null, new StatusResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR)));
+		}		
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "/public/update/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<?> update (@PathVariable(value = "id") Long id,  @Valid @RequestBody User detail) { 
+		
+		try {
+
+			User user = userService.update(id, detail);
+			
+			if (user == null) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new APIGenericResponse(user, new StatusResponse("User not found.", HttpStatus.NOT_FOUND)));
+			}
+			 
+			return ResponseEntity.ok(new APIGenericResponse(user, new StatusResponse("Request API is successfully", HttpStatus.OK)));
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new APIGenericResponse(null, new StatusResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR)));
+		}		
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/public/delete/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<?> delete (@PathVariable(value = "id") Long id) { 
+		
+		try {
+
+			Boolean deleted = userService.delete(id);
+			
+			if (deleted) {
+				return ResponseEntity.ok(new APIGenericResponse(deleted, new StatusResponse("Request API is successfully", HttpStatus.OK)));
+			}
+			 
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new APIGenericResponse(deleted, new StatusResponse("User not found.", HttpStatus.NOT_FOUND)));
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new APIGenericResponse(null, new StatusResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR)));
 		}		
 	}
 	
