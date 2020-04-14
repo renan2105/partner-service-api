@@ -68,10 +68,11 @@
 		
 		<!-- PostgreSQL -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>9.2-1003-jdbc4</version>
+    		<groupId>org.postgresql</groupId>
+    		<artifactId>postgresql</artifactId>
+    		<version>42.2.12</version>
 		</dependency>
+
 		
 		<!-- C3p0 -->
 		<dependency>
