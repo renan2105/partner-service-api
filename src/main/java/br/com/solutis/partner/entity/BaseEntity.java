@@ -1,6 +1,6 @@
 /*
 --+
-    | Project ACCOUNT SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
+    | Project PARTNER SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
     | Copyright(c) by ProfitCode IT Solutions
     |
     | All rights reserved.
@@ -12,7 +12,7 @@
     | you entered with ProfitCode IT Solutions.
  +--
  */
-package br.com.ecommerce.ms.account.entity;
+package br.com.solutis.partner.entity;
 
 import java.io.Serializable;
 

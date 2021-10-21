@@ -1,6 +1,6 @@
 /*
 --+
-    | Project ACCOUNT SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
+    | Project PARTNER SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
     | Copyright(c) by ProfitCode IT Solutions
     |
     | All rights reserved.
@@ -12,7 +12,7 @@
     | you entered with ProfitCode IT Solutions.
  +--
  */
-package br.com.ecommerce.ms.account.repository;
+package br.com.solutis.partner.repository;
 
 import java.beans.PropertyVetoException;
 import java.util.HashMap;
@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import br.com.solutis.partner.util.PartnerServiceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -33,8 +34,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import br.com.ecommerce.ms.account.util.AccountServiceUtil;
-
 /**
  * @author ProfitCode IT Solutions
  *
@@ -42,7 +41,7 @@ import br.com.ecommerce.ms.account.util.AccountServiceUtil;
  *
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "br.com.ecommerce.ms.account.entity")
+@EnableJpaRepositories(basePackages = "br.com.solutis.partner.entity")
 public class Persistence {
 	
 	/**
@@ -67,8 +66,8 @@ public class Persistence {
         }
         
         dataSource.setJdbcUrl(System.getenv().get("DATABASE_URL_SERVER"));
-        dataSource.setUser(AccountServiceUtil.getDataBaseUsername());
-        dataSource.setPassword(AccountServiceUtil.getDataBasePassword());
+        dataSource.setUser(PartnerServiceUtil.getDataBaseUsername());
+        dataSource.setPassword(PartnerServiceUtil.getDataBasePassword());
         dataSource.setMinPoolSize(Integer.parseInt("10"));
         dataSource.setMaxPoolSize(Integer.parseInt("50"));
         dataSource.setMaxIdleTime(Integer.parseInt("300"));
@@ -84,7 +83,7 @@ public class Persistence {
 	    entityManagerFactory.setDataSource(dataSource);
 	    entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 	    entityManagerFactory.setJpaDialect(new HibernateJpaDialect());
-	    entityManagerFactory.setPackagesToScan("br.com.ecommerce.ms.account.entity");
+	    entityManagerFactory.setPackagesToScan("br.com.solutis.partner.entity");
 	    
 	    Map<String, String> props = new HashMap<String,String>();
 		

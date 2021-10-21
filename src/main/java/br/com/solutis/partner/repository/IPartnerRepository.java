@@ -1,6 +1,6 @@
 /*
 --+
-    | Project ACCOUNT SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
+    | Project PARTNER SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
     | Copyright(c) by ProfitCode IT Solutions
     |
     | All rights reserved.
@@ -12,28 +12,17 @@
     | you entered with ProfitCode IT Solutions.
  +--
  */
-package br.com.ecommerce.ms.account.repository;
+package br.com.solutis.partner.repository;
 
-import java.util.Optional;
-
+import br.com.solutis.partner.entity.Partner;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import br.com.ecommerce.ms.account.entity.User;
 
 /**
  * @author ProfitCode IT Solutions
  * 
- * Define the data repository for user operations.
+ * Define the data repository for partner operations.
  *
  */
-public interface IUserRepository extends JpaRepository<User, Long> {
+public interface IPartnerRepository extends JpaRepository<Partner, String> {
 	
-	/**
-	 * Find user by identification.
-	 * 
-	 * @param The identification of user found.
-	 * @return User if found.
-	 */
-	public Optional<User> findById (Long id);
-
 }

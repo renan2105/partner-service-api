@@ -1,6 +1,6 @@
 /*
 --+
-    | Project ACCOUNT SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
+    | Project PARTNER SERVICE API - Java Class File : 1.0.0 Data: 10/06/2018
     | Copyright(c) by ProfitCode IT Solutions
     |
     | All rights reserved.
@@ -12,7 +12,7 @@
     | you entered with ProfitCode IT Solutions.
  +--
  */
-package br.com.ecommerce.ms.account;
+package br.com.solutis.partner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,19 +31,19 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableCaching
-public class AccountApplication {
+public class PartnerApplication {
 
 	public static void main(String[] args) throws Exception {
 		
 		SpringApplication app;
-		app = new SpringApplication(AccountApplication.class);
+		app = new SpringApplication(PartnerApplication.class);
 		app.run(args);
 		
 	}
 	
 	@Bean
 	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> webServerFactoryCustomizer() {
-	    return factory -> factory.setContextPath("/account/api/v1");
+	    return factory -> factory.setContextPath("/partner/api/v1");
 	}
 
 }
