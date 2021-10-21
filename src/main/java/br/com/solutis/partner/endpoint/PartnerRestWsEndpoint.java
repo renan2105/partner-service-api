@@ -21,6 +21,7 @@ import br.com.solutis.partner.service.PartnerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -88,6 +89,23 @@ public class PartnerRestWsEndpoint {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new APIGenericResponse(null, new StatusResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR)));
 		}		
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/public/readPaginated/partner/{page}/{quantityForPage}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<?> readPaginated (@PathVariable(value = "page") Integer page,
+														  @PathVariable(value = "quantityForPage") Integer quantityForPage) {
+
+		try {
+
+			Page<Partner> partnerPage = partnerService.readPaginated(page, quantityForPage);
+
+			return ResponseEntity.ok(new APIGenericResponse(partnerPage, new StatusResponse("Request API is successfully", HttpStatus.OK)));
+
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new APIGenericResponse(null, new StatusResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR)));
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/public/readAll/partner", produces = MediaType.APPLICATION_JSON_VALUE)

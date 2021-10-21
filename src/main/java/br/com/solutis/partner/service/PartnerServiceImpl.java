@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -103,6 +105,29 @@ public class PartnerServiceImpl implements PartnerService {
 		try {
 
 			return iPartnerRepository.findAll();
+
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+
+	}
+
+	/**
+	 * Get paginated partner.
+	 *
+	 * @param page and quantityForPage
+	 * @return paginated Partner.
+	 */
+	@Override
+	public Page<Partner> readPaginated(Integer page, Integer quantityForPage) throws Exception {
+
+		logger.info("Reading all partner.");
+
+		try {
+
+			PageRequest pageRequest = PageRequest.of(page, quantityForPage);
+
+			return iPartnerRepository.findAll(pageRequest);
 
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());

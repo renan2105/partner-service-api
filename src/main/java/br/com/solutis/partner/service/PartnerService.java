@@ -15,6 +15,7 @@
 package br.com.solutis.partner.service;
 
 import br.com.solutis.partner.entity.Partner;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,14 @@ public interface PartnerService {
 	 * @return all Partner.
 	 */
 	public List<Partner> readAll() throws Exception;
+
+	/**
+	 * Get all partner.
+	 *
+	 * @param none
+	 * @return all Partner.
+	 */
+	Page<Partner> readPaginated(Integer page, Integer quantityForPage) throws Exception;
 	
 	/**
 	 * Update partner.

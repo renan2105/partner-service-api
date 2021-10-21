@@ -15,6 +15,8 @@
 package br.com.solutis.partner.repository;
 
 import br.com.solutis.partner.entity.Partner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -24,5 +26,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  */
 public interface IPartnerRepository extends JpaRepository<Partner, String> {
-	
+
+    Page<Partner> findAll(Pageable pegeable);
+
 }
